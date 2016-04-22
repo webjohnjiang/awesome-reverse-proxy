@@ -1,0 +1,30 @@
+{
+  "name": "awesome-reverse-proxy",
+  "version": "1.0.0",
+  "description": "a simple reverse-proxy",
+  "main": "index.js",
+  "dependencies": {
+    "awesome-balancer": "^1.0.2",
+    "debug": "^2.2.0",
+    "http-proxy": "^1.13.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha test",
+    "proxy": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuiyongjian/awesome-reverse-proxy.git"
+  },
+  "keywords": [
+    "reverse-proxy",
+    "load-balance"
+  ],
+  "author": "cuiyongjian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cuiyongjian/awesome-reverse-proxy/issues"
+  },
+  "homepage": "https://github.com/cuiyongjian/awesome-reverse-proxy#readme"
+}

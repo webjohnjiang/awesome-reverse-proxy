@@ -1,0 +1,92 @@
+{
+    "rules": [
+        {
+            "from": "*",
+            "to": "upstream:cuiyongjian2"
+        },
+        {
+            "from": "*",
+            "to": "upstream:cuiyongjian"
+        },
+        {
+            "from": "*",
+            "to": "upstream:cuiyongjian"
+        },
+        {
+            "from": "*",
+            "to": "upstream:cuiyongjian"
+        }
+    ],
+    "engines": [
+        {
+            "index": "0",
+            "engine": "DynamicWeightedEngine"
+        },
+        {
+            "index": "1",
+            "engine": "BusinessDivisionEngine"
+        },
+        {
+            "index": "2",
+            "engine": "RandomEngine"
+        },
+        {
+            "index": "3",
+            "engine": "RoundRobinEngine"
+        },
+        {
+            "index": "4",
+            "engine": "WeightedRoundRobinEngine"
+        }
+    ],
+    "upstreams": [
+        {
+            "name": "cuiyongjian",
+            "engine": "0",
+            "hosts": [
+                {
+                    "value": "http://192.168.1.203:8001",
+                    "weight": 1
+                },
+                {
+                    "value": "http://192.168.1.204:8001",
+                    "weight": 1
+                },
+                            {
+                    "value": "http://192.168.1.205:8001",
+                    "weight": 1
+                },
+                {
+                    "value": "http://192.168.1.206:8001",
+                    "weight": 1
+                },
+                {
+                    "value": "http://192.168.1.207:8001",
+                    "weight": 1
+                },
+                {
+                    "value": "http://192.168.1.208:8001",
+                    "weight": 1
+                },
+                {
+                    "value": "http://192.168.1.211:8001",
+                    "weight": 1
+                }
+            ]
+        },
+        {
+            "name": "cuiyongjian2",
+            "engine": "4",
+            "hosts": [
+                {
+                    "value": "http://localhost:5060",
+                    "weight": 3
+                },
+                {
+                    "value": "http://blog.cuiyongjian.com",
+                    "weight": 1
+                }
+            ]
+        }
+    ]
+}
