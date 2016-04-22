@@ -6,7 +6,7 @@
 
 * 基于[http-proxy](https://www.npmjs.com/package/http-proxy)
 * 支持负载均衡策略的配置（负载策略基于[awesome-balancer](https://github.com/cuiyongjian/awesome-balancer)）
-* DynamicWeightedEngine需配合探针一起使用，使用方法请参考[DynamicWeightedEngine](https://github.com/cuiyongjian/awesome-balancer#dynamicweightedengine)。
+* 若启动DynamicWeightedEngine负载均衡则需提前在子节点启动探针。探针使用方法请参考[DynamicWeightedEngine](https://github.com/cuiyongjian/awesome-balancer#dynamicweightedengine)。
 
 ## Require
 
@@ -25,8 +25,6 @@
     npm run proxy
 ```
 
+建议静态文件统一转发到文件处理服务器或CDN，以免给后端applicaton服务带来混淆和额外压力。
+
 ## 配置文件说明
-
-
-
-
