@@ -38,13 +38,14 @@ debug(rules);
 // 在自己的server中使用`proxy.web()` 转发web请求
 // 用`proxy.ws()` 转发websocket请求
 var server = http.createServer(function(req, res) {
+    debug('请求来源： ' + req.url);
+    debug('网络请求参数url解析为： ', url.parse(req.url, true).query);
   // 按照用户配置的rules依次 匹配规则。以最先匹配到的为准进行转发。
   for (var i = 0, len = rules.length; i < len; i++) {
     var queryParams = url.parse(req.url, true).query;
-    debug('网络请求url解析为： ', queryParams);
     if (rules[i].from === req.url || rules[i].from === '*') {
         var currentProxyTo = rules[i].to(queryParams.type);
-        debug('请求来源： ' + req.url + ';  本次转发方向：' + currentProxyTo);
+        debug('本次转发方向：' + currentProxyTo);
         // req.headers.host = url.parse(currentProxyTo).hostname; // 反向代理就应该把用户原始host转发给后端服务器，这里只是临时测试我的博客，因为我博客nginx只认绑定了的域名
         // debug(req.headers.host);
         proxy.web(req, res, {target: currentProxyTo});
@@ -52,6 +53,7 @@ var server = http.createServer(function(req, res) {
     }
   }
   // 未匹配到的返回404.
+  debug('悲剧，没匹配到规则啊');
   res.end('404');
 });
 
