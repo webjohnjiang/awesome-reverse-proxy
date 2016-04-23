@@ -149,7 +149,7 @@ function createEngine(upstreamName) {
         var typeEngine = engines.filter(function (item) {
             return item.index === curUpsteam.typeEngine;
         })[0].engine; // 业务划分后，每个业务类型的节点负载均衡方法。
-        return new EngineClass(pool, curUpsteam.);
+        return new EngineClass(pool, typeEngine);
     }
     else {
         return new EngineClass(pool);
