@@ -42,7 +42,7 @@ var server = http.createServer(function(req, res) {
   for (var i = 0, len = rules.length; i < len; i++) {
     if (rules[i].from === req.url || rules[i].from === '*') {
         var currentProxyTo = rules[i].to();
-        debug('本次转发方向：' + currentProxyTo);
+        debug('请求来源： ' req.url + ';  本次转发方向：' + currentProxyTo);
         // req.headers.host = url.parse(currentProxyTo).hostname; // 反向代理就应该把用户原始host转发给后端服务器，这里只是临时测试我的博客，因为我博客nginx只认绑定了的域名
         // debug(req.headers.host);
         proxy.web(req, res, {target: currentProxyTo});
