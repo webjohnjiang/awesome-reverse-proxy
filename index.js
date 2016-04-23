@@ -40,8 +40,10 @@ debug(rules);
 var server = http.createServer(function(req, res) {
   // 按照用户配置的rules依次 匹配规则。以最先匹配到的为准进行转发。
   for (var i = 0, len = rules.length; i < len; i++) {
+    var queryParams = url.parse(req.url, true).query;
+    debug('网络请求url解析为： ', queryParams);
     if (rules[i].from === req.url || rules[i].from === '*') {
-        var currentProxyTo = rules[i].to();
+        var currentProxyTo = rules[i].to(queryParams.type);
         debug('请求来源： ' + req.url + ';  本次转发方向：' + currentProxyTo);
         // req.headers.host = url.parse(currentProxyTo).hostname; // 反向代理就应该把用户原始host转发给后端服务器，这里只是临时测试我的博客，因为我博客nginx只认绑定了的域名
         // debug(req.headers.host);
@@ -92,14 +94,19 @@ function parseRules(rules) {
             if (!engines[upstreamName]) {
                 engines[upstreamName] = createEngine(upstreamName);
             }
+            // 闭包维持特定规则下的 引擎实例
             rules[i].to = (function (e) {
-                return function () {
-                    return e.pick();
+                return function (type) {
+                    if (type) {
+                        debug('我靠，传入type咯： ', type);
+                    }
+                    return e.pick(type);
                 }
             })(engines[upstreamName]);
         }
         else {
             // 普通转发to
+            // 利用闭包维持特定规则当时的 转发对象
             rules[i].to = (function (o) {
                 return function () {
                     return o;
