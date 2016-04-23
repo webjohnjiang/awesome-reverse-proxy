@@ -145,6 +145,13 @@ function createEngine(upstreamName) {
     }
     var pool = curUpsteam.hosts;
     debug('待创建负载均衡引擎的池子： ', pool);
-    var engine = new EngineClass(pool);
-    return engine;
+    if (engineName === 'BusinessDivisionEngine') {
+        var typeEngine = engines.filter(function (item) {
+            return item.index === curUpsteam.typeEngine;
+        })[0].engine; // 业务划分后，每个业务类型的节点负载均衡方法。
+        return new EngineClass(pool, curUpsteam.);
+    }
+    else {
+        return new EngineClass(pool);
+    }
 };
