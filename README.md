@@ -1,9 +1,10 @@
 # awesome-reverse-proxy
-基于node的反向代理服务器;支持HTTPS/HTTP/WebSocket
+基于node的反向代理服务器
 
 
 ## Feature
 
+* 支持HTTPS/HTTP/WebSocket
 * 基于[http-proxy](https://www.npmjs.com/package/http-proxy)
 * 支持负载均衡策略的json配置（负载策略基于[awesome-balancer](https://github.com/cuiyongjian/awesome-balancer)）
 * 若启动DynamicWeightedEngine[实时资源动态负载均衡]则需提前在子节点启动探针。探针使用方法请参考[DynamicWeightedEngine](https://github.com/cuiyongjian/awesome-balancer#dynamicweightedengine)。
