@@ -112,7 +112,7 @@ function parseRules(rules) {
 };
 
 function createEngine(upstreamName) {
-    debug('我在创建该upstream的引擎' + upstreamName);
+    debug('我在创建该upstream的引擎: ' + upstreamName);
     var upstreams = config.upstreams;
     var curUpsteam = null;
     for (var i = 0, len = upstreams.length; i < len; i++) {
@@ -140,18 +140,26 @@ function createEngine(upstreamName) {
         // 所以在DynamicWeighted引擎下，我们需要修改默认的upstream.hosts
         var hosts = curUpsteam.hosts;
         pool = hosts.map(function (item) {
-            var url = require('url');
-            var urlObj = url.parse(item.value);
-            var newItem = {
-                value: urlObj.hostname,
-                weight: item.weight
-            };
+            var newItem = null;
+            if (item.value || item.object) {
+                var value = item.value || item.object;
+                var urlObj = url.parse(value);
+                newItem = {
+                    value: urlObj.hostname,
+                    weight: item.weight
+                };
+            }
+            else {
+                newItem = url.parse(item).hostname;
+            }
+
             return newItem;
         });
     }
     else {
         pool = curUpsteam.hosts;
     }
+    debug('待创建负载均衡引擎的池子： ', pool);
     var engine = new EngineClass(pool);
     return engine;
 };
