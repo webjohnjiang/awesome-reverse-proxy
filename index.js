@@ -134,31 +134,7 @@ function createEngine(upstreamName) {
     if (!EngineClass) {
         throw new Error('配置文件有误，叫做： ' + engineName + ' 的负载均衡引擎 配置不正确。');
     }
-    var pool = [];
-    if (engineName === "DynamicWeightedEngine") {
-        // 这个动态均衡策略是要接收 ip或hostname 列表作为选举的池子。（因为他要拿着个ip区连接探针的端口）
-        // 所以在DynamicWeighted引擎下，我们需要修改默认的upstream.hosts
-        var hosts = curUpsteam.hosts;
-        pool = hosts.map(function (item) {
-            var newItem = null;
-            if (item.value || item.object) {
-                var value = item.value || item.object;
-                var urlObj = url.parse(value);
-                newItem = {
-                    value: urlObj.hostname,
-                    weight: item.weight
-                };
-            }
-            else {
-                newItem = url.parse(item).hostname;
-            }
-
-            return newItem;
-        });
-    }
-    else {
-        pool = curUpsteam.hosts;
-    }
+    var pool = curUpsteam.hosts;
     debug('待创建负载均衡引擎的池子： ', pool);
     var engine = new EngineClass(pool);
     return engine;
