@@ -5,8 +5,7 @@
 ## Feature
 
 * 支持HTTPS/HTTP/WebSocket
-* 支持负载均衡策略的json配置（负载策略基于[awesome-balancer](https://github.com/cuiyongjian/awesome-balancer)）
-* 若启动DynamicWeightedEngine[实时资源动态负载均衡]则需提前在子节点启动探针。探针使用方法请参考[DynamicWeightedEngine](https://github.com/cuiyongjian/awesome-balancer#dynamicweightedengine)。
+* 支持json规则配置
 * 支持404配置[开发中...]
 * 支持通配符或正则表达式进行代理规则配置[开发中...]。
 
@@ -114,8 +113,9 @@ rules节点中的规则按照从上往下匹配，一旦匹配成功，则后面
 
 ## misc
 
-* 基于[awesome-balancer](https://github.com/cuiyongjian/awesome-balancer)引擎实现负载均衡。
-* 基于[http-proxy](https://www.npmjs.com/package/http-proxy)请求转发。
+* 基于[awesome-balancer](https://github.com/cuiyongjian/awesome-balancer)引擎实现负载均衡
+* 基于[http-proxy](https://www.npmjs.com/package/http-proxy)请求转发
+* 若启动DynamicWeightedEngine[实时资源动态负载均衡]，则需提前在子节点启动探针。探针使用方法请参考[DynamicWeightedEngine](https://github.com/cuiyongjian/awesome-balancer#dynamicweightedengine)
 
 ## license
 This software is free to use under the [MIT](http://opensource.org/licenses/MIT)  license. See the [LICENSE file][] for license text and copyright information.
