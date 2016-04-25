@@ -115,7 +115,6 @@ rules节点中的规则按照从上往下匹配，一旦匹配成功，则后面
 ## misc
 
 * 基于[awesome-balancer](https://github.com/cuiyongjian/awesome-balancer)引擎实现负载均衡。
-* awesome-balancer之[动态权重的负载均衡] 得益于[resource-meter](https://github.com/cuiyongjian/resource-meter)模块对集群实时性能的评价。
 * 基于[http-proxy](https://www.npmjs.com/package/http-proxy)请求转发。
 
 ## license
